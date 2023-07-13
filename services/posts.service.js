@@ -26,9 +26,9 @@ class PostService {
     }
   };
   // 게시글 상세 조회 API
-  findPost = async (postId) => {
+  findOnePost = async (postId) => {
     try {
-      const postDetailData = await this.postRepository.findPost(postId);
+      const postDetailData = await this.postRepository.findOnePost(postId);
       if (!postDetailData) {
         return { code: 404, message: '게시글이 존재하지 않습니다.' };
       }
@@ -40,7 +40,7 @@ class PostService {
   //게시글 수정 API
   updatePost = async (userId, postId, title, content) => {
     try {
-      const updatedPost = await this.postRepository.findPost(postId);
+      const updatedPost = await this.postRepository.findOnePost(postId);
       if (!updatedPost) {
         return { code: 404, message: '게시글이 존재하지 않습니다.' };
       }
@@ -60,7 +60,7 @@ class PostService {
   //게시글 삭제 API
   deletePost = async (userId, postId) => {
     try {
-      const deletedPost = await this.postRepository.findPost(postId);
+      const deletedPost = await this.postRepository.findOnePost(postId);
       if (!deletedPost) {
         return { code: 404, message: '게시글이 존재하지 않습니다.' };
       }

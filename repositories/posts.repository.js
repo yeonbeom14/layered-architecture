@@ -24,7 +24,7 @@ class PostRepository {
     return postData;
   };
   // 게시글 상세 조회 API
-  findPost = async (postId) => {
+  findOnePost = async (postId) => {
     const postDetailData = await Posts.findOne({
       raw: true,
       include: [
