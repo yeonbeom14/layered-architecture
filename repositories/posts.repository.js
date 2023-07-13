@@ -23,6 +23,33 @@ class PostRepository {
 
     return postData;
   };
+  // 게시글 상세 조회 API
+  findPost = async (postId) => {
+    const postDetailData = await Posts.findOne({
+      raw: true,
+      include: [
+        {
+          model: Users,
+          attributes: ['nickname'],
+        },
+      ],
+      where: { postId },
+    });
+
+    return postDetailData;
+  };
+  //게시글 수정 API
+  updatePost = async (postId, title, content) => {
+    await Posts.update({ title, content }, { where: { postId } });
+
+    return;
+  };
+  //게시글 삭제 API
+  deletePost = async (postId) => {
+    await Posts.destroy({ where: { postId } });
+
+    return;
+  };
 }
 
 module.exports = PostRepository;

@@ -17,6 +17,33 @@ class PostsController {
 
     res.status(code).json({ message, postData });
   };
+  // 게시글 상세 조회 API
+  getPostDetail = async (req, res) => {
+    const { postId } = req.params;
+
+    const { code, message, postDetailData } = await this.postService.findPost(postId);
+
+    res.status(code).json({ message, postDetailData });
+  };
+  //게시글 수정 API
+  updatePost = async (req, res) => {
+    const { userId } = res.locals.user;
+    const { postId } = req.params;
+    const { title, content } = req.body;
+
+    const { code, message } = await this.postService.updatePost(userId, postId, title, content);
+
+    res.status(code).json({ message });
+  };
+  //게시글 삭제 API
+  deletePost = async (req, res) => {
+    const { userId } = res.locals.user;
+    const { postId } = req.params;
+
+    const { code, message } = await this.postService.deletePost(userId, postId);
+
+    res.status(code).json({ message });
+  };
 }
 
 module.exports = PostsController;
