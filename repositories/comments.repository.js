@@ -1,4 +1,4 @@
-const { Users, Posts, Comments } = require('../models');
+const { Users, Comments } = require('../models');
 
 class CommentRepository {
   // 댓글 생성 API
@@ -24,18 +24,19 @@ class CommentRepository {
 
     return allComment;
   };
+  // commentId 확인
   findOneComment = async (commentId) => {
     const commentData = await Comments.findOne({ where: { commentId } });
 
     return commentData;
   };
-  //댓글 수정 api
+  // 댓글 수정 api
   updateComment = async (commentId, comment) => {
     await Comments.update({ comment }, { where: { commentId } });
 
     return;
   };
-  //댓글 삭제 api
+  // 댓글 삭제 api
   deleteComment = async (commentId) => {
     await Comments.destroy({ where: { commentId } });
 

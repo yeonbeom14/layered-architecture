@@ -2,7 +2,6 @@ const CommentService = require('../services/comments.service');
 
 class CommentsController {
   commentService = new CommentService();
-
   // 댓글 생성 API
   createComment = async (req, res) => {
     const { userId } = res.locals.user;
@@ -20,6 +19,7 @@ class CommentsController {
   // 댓글 목록 조회 API
   getComments = async (req, res) => {
     const { postId } = req.params;
+
     const { code, message, allComment } = await this.commentService.findAllComment(postId);
 
     res.status(code).json({ message, allComment });

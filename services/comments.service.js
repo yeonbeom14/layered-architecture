@@ -34,7 +34,6 @@ class CommentService {
 
       return { code: 200, allComment };
     } catch (err) {
-      console.log(err);
       return { code: 500, message: '댓글 조회에 실패하였습니다.' };
     }
   };
